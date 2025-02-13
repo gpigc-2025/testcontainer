@@ -1,6 +1,6 @@
 imageName=staitus-test:${BUILD_NUMBER}
 containerName=staitus-test
-PORT=5003
+PORT=5005
 
 docker system prune -af
 docker build -t $imageName .
