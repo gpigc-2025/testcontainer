@@ -21,3 +21,7 @@ if __name__ == "__main__":
     while True:
         schedule.run_pending()
         time.sleep(1)
+        
+        print("Container is running... will crash in 5 seconds.")
+        time.sleep(5)
+        raise RuntimeError("Intentional crash for testing purposes.")
