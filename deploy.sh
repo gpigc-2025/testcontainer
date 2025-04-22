@@ -1,5 +1,5 @@
-imageName=testContainer:${BUILD_NUMBER}
-containerName=testContainer
+imageName=test-container:${BUILD_NUMBER}
+containerName=test-container
 PORT=5005
 
 docker system prune -af
