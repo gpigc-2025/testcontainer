@@ -5,7 +5,8 @@ import docker
 import schedule
 import time
 
+def recursive_crash(n):
+    return recursive_crash(n + 1)
+
 if __name__ == "__main__":
-    print("Container is running... will crash in 5 seconds.")
-    time.sleep(5)
-    raise RuntimeError("Intentional crash for testing purposes.")
+    recursive_crash(0)
