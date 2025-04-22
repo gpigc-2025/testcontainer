@@ -5,8 +5,11 @@ import docker
 import schedule
 import time
 
-def recursive_crash(n):
-    return recursive_crash(n + 1)
+def read_config():
+    with open("config/settings.json", "r") as f:
+        data = f.read()
+        print("Config:", data)
 
 if __name__ == "__main__":
-    recursive_crash(0)
+    read_config()
+
