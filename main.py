@@ -5,11 +5,9 @@ import docker
 import schedule
 import time
 
-def read_config():
-    with open("config/settings.json", "r") as f:
-        data = f.read()
-        print("Config:", data)
+def greet(user_name):
+    return "Hello, " + user_name.upper() + "!"
 
 if __name__ == "__main__":
-    read_config()
-
+    user_input = None  # Simulate a broken API or null config
+    print(greet(user_input))
