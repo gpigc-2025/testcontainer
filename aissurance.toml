@@ -2,7 +2,7 @@
 api_url = "http://gpigc2025.york.ac.uk/privateai"
 project_name = "TestContainer"
 project_repo = "gpigc-2025/test-container"
-check_url = "https://example.com"
+check_url = "http://gpigc2025.york.ac.uk/testcontainer"
 
 [WikAI]
 api_url = "http://gpigc2025.york.ac.uk/wikai"
