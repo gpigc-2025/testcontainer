@@ -1,0 +1,9 @@
+[PrivateAEYE]
+api_url = "http://gpigc2025.york.ac.uk/privateai"
+project_name = "TestContainer"
+project_repo = "gpigc-2025/test-container"
+check_url = "https://example.com"
+
+[WikAI]
+api_url = "http://gpigc2025.york.ac.uk/wikai"
+project_name = "TestContainer"
