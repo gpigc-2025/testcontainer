@@ -13,15 +13,17 @@ if __name__ == "__main__":
 ?url={config["PrivateAEYE"]["check_url"]}"))
         comparison = requests.get(f"{config["PrivateAEYE"]["api_url"]}\
 /api/compare_latest/{config["PrivateAEYE"]["project_name"]}")
-        print(comparison)
+        print(comparison.status_code, comparison.text)
         errors = re.compile(
-            r'[0-9]+\. \*\*(?P<title>.+)\*\* \- \*\*Description\*\*: ' +
-            r'(?P<description>.+)( \- \*\*Pixel Coordinates\*\*: .+)?')
-        observations = comparison.text.split('#### ')
+            r'[\w\n]*[0-9]+\. \*\*(?P<title>.+)\*\*[\n\w]*(?P<description>.+)[\w\n]*')
+        observations = comparison.text.split('### ')
+        print(observations)
         for observation in observations:
-            if observation.startswith('[Error] '):
+            if observation.startswith('Errors') or observation.startswith('[Error]'):
                 observation = observation[8:]
+                print(observation)
                 errs = [e.groupdict() for e in errors.finditer(observation)]
+                print(errs)
                 for err in errs:
                     desc = err["description"].replace('"', "'")
                     if "WikAI" in config:
