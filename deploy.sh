@@ -7,4 +7,4 @@ docker build -t $imageName .
 docker stop $containerName || true && docker rm -f $containerName || true
 docker run -p $PORT:$PORT -d --name $containerName $imageName
 
-python3 aissurance.py
+# python3 aissurance.py
