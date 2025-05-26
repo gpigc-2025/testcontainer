@@ -1,13 +1,22 @@
-from flask import Flask
+from flask import Flask, render_template_string, request
 import os
 
-import docker
-import schedule
-import time
+app = Flask(__name__)
 
-def greet(user_name):
-    return "Hello, " + user_name.upper() + "!"
+HTML = '''
+<!doctype html>
+<title>Crash Docker</title>
+<h1>Crash Docker Container</h1>
+<form method="POST">
+    <button type="submit">Crash Now</button>
+</form>
+'''
 
-if __name__ == "__main__":
-    user_input = None  # Simulate a broken API or null config
-    print(greet(user_input))
+@app.route('/', methods=['GET', 'POST'])
+def index():
+    if request.method == 'POST':
+        os._exit(1)  # This forcefully kills the process (crashes container)
+    return render_template_string(HTML)
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5005)
