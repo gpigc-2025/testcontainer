@@ -1,9 +1,9 @@
 [PrivateAEYE]
-api_url = "http://gpigc2025.york.ac.uk/privateai"
+api_url = "http://localhost:5002"
 project_name = "TestContainer"
-project_repo = "gpigc-2025/test-container"
-check_url = "http://gpigc2025.york.ac.uk/testcontainer"
+project_repo = "gpigc-2025/testcontainer"
+check_url = "http://localhost:5005"
 
 [WikAI]
-api_url = "http://gpigc2025.york.ac.uk/wikai"
+api_url = "http://localhost:5001"
 project_name = "TestContainer"
