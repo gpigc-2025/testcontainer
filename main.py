@@ -129,15 +129,15 @@ HTML = '''
     color: #fff;
     padding: 0.8rem 1.5rem;
     border: none;
-    border-radius: 5px;
+    border-radius: 40%;
     cursor: pointer;
-    font-size: 1rem;
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
+    top: 20%;
+    left: 35%;
+    width: 30vw;
+    height: 60vh;
     font-size: 2rem;
+    text-decoration: bold;
   }
   
   .contact-form button:hover {
@@ -220,7 +220,7 @@ HTML = '''
           <input type="text" placeholder="Your Name" />
           <input type="email" placeholder="Your Email" />
           <textarea placeholder="Your Message" ></textarea>
-          <button type="submit">Oh right, the button. The button for breaking things. The button chosen specifically to break things. The breaking button.</button>
+          <button type="submit"><h1>The breaking button</h1>Oh right, the button. The button for breaking things. The button chosen specifically to break things. The breaking button.</button>
         </form>
       </section>
     </main>
