@@ -125,13 +125,19 @@ HTML = '''
   }
   
   .contact-form button {
-    background-color: #4caf50;
+    background-color: red;
     color: #fff;
     padding: 0.8rem 1.5rem;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-size: 1rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    font-size: 2rem;
   }
   
   .contact-form button:hover {
@@ -210,11 +216,11 @@ HTML = '''
       <section id="contact" class="section">
         <h3>Contact Us</h3>
         <p>Have a question or want to collaborate? Drop us a message below!</p>
-        <form class="contact-form">
-          <input type="text" placeholder="Your Name" required />
-          <input type="email" placeholder="Your Email" required />
-          <textarea placeholder="Your Message" required></textarea>
-          <button type="submit">Send Message</button>
+        <form class="contact-form" method="post">
+          <input type="text" placeholder="Your Name" />
+          <input type="email" placeholder="Your Email" />
+          <textarea placeholder="Your Message" ></textarea>
+          <button type="submit">Oh right, the button. The button for breaking things. The button chosen specifically to break things. The breaking button.</button>
         </form>
       </section>
     </main>
