@@ -2,7 +2,7 @@
 api_url = "http://localhost:5002"
 project_name = "TestContainer"
 project_repo = "gpigc-2025/testcontainer"
-check_url = "http://localhost:5005"
+check_url = "http://172.18.0.5:5005"
 
 [WikAI]
 api_url = "http://localhost:5001"
