@@ -17,7 +17,7 @@ if __name__ == "__main__":
         errors = re.compile(
             r'[0-9]+\. \*\*(?P<title>.+)\*\* \- \*\*Description\*\*: ' +
             r'(?P<description>.+)( \- \*\*Pixel Coordinates\*\*: .+)?')
-        observations = comparison.split('#### ')
+        observations = comparison.text.split('#### ')
         for observation in observations:
             if observation.startswith('[Error] '):
                 observation = observation[8:]

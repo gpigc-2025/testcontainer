@@ -1,0 +1,61 @@
+name: Generate Commit Messages
+on: 
+  push:
+
+jobs:
+  Create-Commit-Message:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0  # Fetch all history for all branches and tags
+    
+    - name: Set up Git configuration
+      run: |
+        git config --global user.email "CommAIt@users.noreply.github.com"
+        git config --global user.name "CommAIt"
+
+    - name: Fetch commit diff
+      run: |
+        # Check if there's at least one previous commit
+        if [ "$(git rev-list --count HEAD)" -gt 1 ]; then
+          # Get the last commit hash and the second last commit hash
+          LAST_COMMIT=$(git rev-parse HEAD)
+          PREVIOUS_COMMIT=$(git rev-parse HEAD^)
+
+          # Generate the commit diff between the last and previous commit
+          git diff $PREVIOUS_COMMIT..$LAST_COMMIT > commit_diff.patch
+
+          # Debug: Output commit diff info
+          echo "Last commit: $LAST_COMMIT"
+          echo "Previous commit: $PREVIOUS_COMMIT"
+          echo "Commit diff:"
+          cat commit_diff.patch
+        else
+          echo "No previous commit found. Skipping commit diff generation."
+          exit 1  # Exit gracefully if there's no previous commit
+        fi
+
+    - name: Install dependencies
+      run: pip install openai
+    
+    - name: Run Python script with commit diff as input
+      env:
+        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      run: |
+        python3 .github/workflows/generate_message.py commit_diff.patch > commit_message.txt
+
+    - name: Read generated commit message
+      id: read_message
+      run: echo "message=$(cat commit_message.txt)" >> $GITHUB_ENV
+
+    - name: Update commit description
+      run: |
+        git commit --amend -m "$message"
+        git push --force
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

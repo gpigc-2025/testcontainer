@@ -1,0 +1,45 @@
+name: Generate PR Messages
+on: 
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+
+jobs:
+  Create-Commit-Message:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+    
+    - name: Fetch PR diff
+      run: |
+        BASE_BRANCH=${{ github.event.pull_request.base.ref }}
+        git fetch origin $BASE_BRANCH
+        git diff origin/$BASE_BRANCH > pr_diff.patch
+        echo "Base branch: $BASE_BRANCH"
+        cat pr_diff.patch
+
+    - name: Install dependencies
+      run: pip install openai
+    
+    - name: Run Python script with PR diff as input
+      env:
+        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      run: |
+        python3 .github/workflows/generate_message.py pr_diff.patch > commit_message.txt
+    
+    - name: Read generated commit message
+      id: read_message
+      run: echo "message=$(cat commit_message.txt)" >> $GITHUB_ENV
+    
+    - name: Update PR description
+      run: |
+        gh pr edit ${{ github.event.pull_request.number }} --body "$message"
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
